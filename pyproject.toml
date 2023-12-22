@@ -1,0 +1,51 @@
+[project]
+name = "soundtrack_analyzer"
+authors = [
+    {name = "Adam Pirog"},
+    {email = "pirog.adam@gmail.com"},
+]
+description = "Analyze the soundtrack of your video!"
+readme = "README.md"
+license = { text="MIT" }
+dynamic = ["version"]
+requires-python = ">=3.11"
+dependencies = [
+
+    ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "isort",
+    "black",
+    "pylint"
+    ]
+
+[build-system]
+requires = ["setuptools>=60.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.distutils.bdist_wheel]
+universal = true
+
+[tool.setuptools]
+packages = ["soundtrack_analyzer"]
+
+[tool.setuptools.dynamic]
+version = {attr = "soundtrack_analyzer.version.__version__"}
+[project.scripts]
+soundtrack-analyzer = "soundtrack_analyzer.__main__:cli"
+
+[tool.black]
+line-length = 79
+target-version = ["py311"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.isort]
+profile = "black"
+line_length = 79
+lines_after_imports = 2
