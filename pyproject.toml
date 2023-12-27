@@ -33,8 +33,11 @@ packages = ["soundtrack_analyzer"]
 
 [tool.setuptools.dynamic]
 version = {attr = "soundtrack_analyzer.version.__version__"}
+
 [project.scripts]
-soundtrack-analyzer = "soundtrack_analyzer.__main__:cli"
+soundtrack-analyzer = "soundtrack_analyzer.analyze:cli"
+soundtrack-analyzer-summarize = "soundtrack_analyzer.summarize:cli"
+soundtrack-analyzer-copy = "soundtrack_analyzer.batch_copy:cli"
 
 [tool.black]
 line-length = 79
