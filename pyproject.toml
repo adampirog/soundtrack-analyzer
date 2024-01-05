@@ -28,11 +28,8 @@ dev = [
 requires = ["setuptools>=60.0.0"]
 build-backend = "setuptools.build_meta"
 
-[tool.distutils.bdist_wheel]
-universal = true
-
-[tool.setuptools]
-packages = ["soundtrack_analyzer"]
+[tool.setuptools.packages.find]
+include = ["soundtrack_analyzer*"]
 
 [tool.setuptools.dynamic]
 version = {attr = "soundtrack_analyzer.version.__version__"}
