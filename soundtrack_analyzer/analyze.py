@@ -18,9 +18,10 @@ from typing import NamedTuple, Optional
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.dates import DateFormatter
+from python_utils.timer import format_delta, timer
 from tqdm.contrib.concurrent import process_map
 
-from .utils import extract_timestamp, format_delta, to_datetime, write_csv
+from .utils import extract_timestamp, to_datetime, write_csv
 
 
 def read_sound_file(
@@ -199,7 +200,7 @@ def analyze_file(
 
     message = (
         f"{extract_timestamp(input_file)}\n\n"
-        f"Barking: {format_delta(bark_time)} of {format_delta(total_time)}"
+        f"Barking: {format_delta(bark_time, digits=0)} of {format_delta(total_time, digits=0)}"
         f" ({np.round(bark_fraction * 100, 2)}%)"
     )
 
@@ -296,13 +297,14 @@ def main(args: Namespace):
     input_path = Path(args.input_path)
 
     if input_path.is_file():
-        result = analyze_file(
-            input_file=args.input_path,
-            cutoff=args.cutoff,
-            max_gap=args.max_gap,
-            undersample=args.undersample,
-            output_file="auto",
-        )
+        with timer("Analysis time"):
+            result = analyze_file(
+                input_file=args.input_path,
+                cutoff=args.cutoff,
+                max_gap=args.max_gap,
+                undersample=args.undersample,
+                output_file="auto",
+            )
         summary_file = input_path.parent / "summary.csv"
         write_csv([result], summary_file)
         if not args.no_display:

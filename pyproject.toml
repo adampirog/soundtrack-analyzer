@@ -13,7 +13,8 @@ dependencies = [
     "matplotlib>=3.7.2,<4.0.0",
     "numpy>=1.24.3,<2.0.0",
     "pandas>=2.0.3,<3.0.0",
-    "tqdm>=4.66.1,<5.0.0"
+    "tqdm>=4.66.1,<5.0.0",
+    "python-utils @ git+https://github.com/adampirog/python-utils"
     ]
 
 [project.optional-dependencies]
@@ -38,6 +39,7 @@ version = {attr = "soundtrack_analyzer.version.__version__"}
 soundtrack-analyzer = "soundtrack_analyzer.analyze:cli"
 soundtrack-analyzer-summarize = "soundtrack_analyzer.summarize:cli"
 soundtrack-analyzer-copy = "soundtrack_analyzer.batch_copy:cli"
+soundtrack-analyzer-archive = "soundtrack_analyzer.archive:cli"
 
 [tool.black]
 line-length = 79

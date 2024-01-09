@@ -4,45 +4,11 @@ generate timestamps of given length and save them as a resource file.
 """
 import csv
 from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
-from contextlib import contextmanager
 from datetime import datetime, timedelta
 from pathlib import Path
-from time import perf_counter
 
 import numpy as np
 from tqdm.auto import tqdm
-
-
-def format_delta(seconds: float, digits: int = 0) -> str:
-    """
-    Formats time delta with given precision.
-    """
-    delta = str(timedelta(seconds=seconds))
-
-    if digits == 0:
-        delta = delta.split(".", 1)[0]
-    elif digits > 0:
-        # format microseconds
-        delta = delta.split(".")
-        delta[1] = delta[1][:digits]
-        delta = ".".join(delta)
-
-    return delta
-
-
-@contextmanager
-def timer(message: str = "Time elapsed:", digits: int = 0):
-    """
-    Context manager based timer.
-    """
-
-    start = perf_counter()
-    yield
-    stop = perf_counter()
-
-    delta = format_delta(seconds=(stop - start), digits=digits)
-
-    print(f"{message} {delta}")
 
 
 def extract_timestamp(file_path: str) -> datetime:

@@ -1,10 +1,6 @@
 import pytest
 
-from soundtrack_analyzer.utils import (
-    extract_timestamp,
-    format_delta,
-    to_datetime,
-)
+from soundtrack_analyzer.utils import extract_timestamp, to_datetime
 
 
 @pytest.mark.parametrize(
@@ -29,13 +25,3 @@ def test_timestamp_extraction(value, expected):
 )
 def test_sec2datetime_conversion(value, expected):
     assert str(to_datetime(value)) == expected
-
-
-@pytest.mark.parametrize(
-    "value",
-    (3.21, 3.91, 3.00),
-)
-def test_delta_formatter(value):
-    delta = format_delta(value)
-
-    assert delta == "0:00:03"
