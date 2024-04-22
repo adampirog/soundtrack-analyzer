@@ -5,6 +5,7 @@ All files that are already in the destination are skipped
 
 WARNING: Script written for specific filenames format (TAPO cameras recordings)
 """
+
 import shutil
 from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
 from datetime import datetime
@@ -94,7 +95,7 @@ def main(args: Namespace):
     cutoff_date = datetime(year=2023, month=3, day=1)
     files = get_filelist(source_dir, destination_root, cutoff_date)
 
-    thread_map(process_file, files, repeat(destination_root))
+    thread_map(process_file, files, repeat(destination_root), desc="Copying")
 
 
 def cli():

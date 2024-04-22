@@ -8,8 +8,9 @@ from pathlib import Path
 import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.dates import DateFormatter
+from python_utils.timer import format_delta
 
-from .utils import format_delta, to_datetime
+from .utils import to_datetime
 
 
 def plot_summary(df: pd.DataFrame, output_dir: Path, title: str):
@@ -32,7 +33,7 @@ def plot_summary(df: pd.DataFrame, output_dir: Path, title: str):
 
     msg = (
         f"{title}\n"
-        f"Barking: {format_delta(bark)} of {format_delta(total)}"
+        f"Barking: {format_delta(bark, digits=0)} of {format_delta(total, digits=0)}"
         f" ({((bark / total) * 100):.2f}%)"
     )
 

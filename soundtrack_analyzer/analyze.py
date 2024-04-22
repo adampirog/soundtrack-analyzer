@@ -1,11 +1,12 @@
 """
 Analyze the soundtrack of a video.
 
-Extracts the sound signal, patches it and analysis the volume values summarizing
-how much of the sound samples are considered high.
+Extracts the sound signal, patches it and analysis the volume values 
+summarizing how much of the sound samples are considered high.
 
 Produces both raw value and plot summary.
 """
+
 import subprocess
 import wave
 from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
@@ -321,6 +322,7 @@ def main(args: Namespace):
             repeat(args.undersample),
             repeat("auto"),
             max_workers=args.n_jobs,
+            desc="Analyzing",
         )
         summary_file = input_path / "summary.csv"
         write_csv(results, summary_file, overwrite=args.rewrite)
@@ -328,5 +330,9 @@ def main(args: Namespace):
         raise FileNotFoundError(f"Path {input_path} does not exist.")
 
 
-if __name__ == "__main__":
+def cli():
     main(parse_args())
+
+
+if __name__ == "__main__":
+    cli()
